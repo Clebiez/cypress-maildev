@@ -11,6 +11,13 @@
     "e2e": "npx cypress run",
     "fillEmail": "node ./fillEmail.js"
   },
+  "keywords": [
+    "cypress",
+    "e2e",
+    "test",
+    "maildev",
+    "mail"
+  ],
   "devDependencies": {
     "cypress": "^5.5.0",
     "eslint": "^7.12.1",
