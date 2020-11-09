@@ -1,18 +1,12 @@
 describe("Maildev recipes", () => {
   before(() => {
-    cy.maildevDeleteAllMessages().then(() => {
-      cy.exec(
-        `npm run fillEmail --host ${Cypress.env(
-          "MAILDEV_HOST"
-        )} --port ${Cypress.env("MAILDEV_SMTP_PORT")}`
-      );
-    });
+    cy.fillMaildev();
   });
 
   describe("maildevGetAllMessages", () => {
     it("Should get all emails and counting 3.", () => {
       cy.maildevGetAllMessages().then((emails) => {
-        expect(emails.length).to.equal(3);
+        expect(emails.length).to.equal(4);
       });
     });
   });
@@ -28,9 +22,19 @@ describe("Maildev recipes", () => {
   describe("maildevGetMessageById", () => {
     it("Should get an email based on the ID", () => {
       cy.maildevGetAllMessages().then((emails) => {
-        cy.maildevGetMessageById(emails[2].id).then((email) => {
+        cy.maildevGetMessageById(emails[3].id).then((email) => {
           expect(email.subject).to.equal("I'm the last email sent !");
         });
+      });
+    });
+  });
+
+  describe("maildevVisitMessageById", () => {
+    it("Should display maildev webapp with message", () => {
+      cy.maildevGetAllMessages().then((emails) => {
+        cy.maildevVisitMessageById(emails[2].id);
+        cy.get('body h1').should('have.text', 'Email incoming !');
+        cy.get('body a').should('exist').and('have.text', 'click on this link');
       });
     });
   });
@@ -62,7 +66,44 @@ describe("Maildev recipes", () => {
       cy.maildevGetAllMessages().then((emails) => {
         cy.maildevDeleteMessageById(emails[0].id);
         cy.maildevGetAllMessages().then((emails) => {
-          expect(emails.length).to.equal(2);
+          expect(emails.length).to.equal(3);
+        });
+      });
+    });
+  });
+
+  describe("maildevGetOTPCode", () => {
+    it("Should return the OTP code", () => {
+      cy.maildevGetOTPCode(
+        "Hi, your OTP code is 012345, please do not share it"
+      ).then((code) => {
+        expect(code).to.equal("012345");
+      });
+    });
+
+    it("Should return the OTP code with 8 digits", () => {
+      cy.maildevGetOTPCode(
+        "Hi, your OTP code is 01234567, please do not share it",
+        8
+      ).then((code) => {
+        expect(code).to.equal("01234567");
+      });
+    });
+
+    it("Should return null if no OTP code exist", () => {
+      cy.maildevGetOTPCode(
+        "Hi, your OTP code is 012345, please do not share it",
+        8
+      ).then((code) => {
+        expect(code).to.equal(null);
+      });
+    });
+
+    it("Should get OTP code from a message", () => {
+      cy.maildevGetMessageBySubject("Your OTP code").then((message) => {
+        cy.log(message);
+        cy.maildevGetOTPCode(message.text).then((code) => {
+          expect(code).to.equal("012345");
         });
       });
     });
@@ -73,6 +114,7 @@ describe("Maildev recipes", () => {
       cy.maildevDeleteAllMessages();
       cy.maildevGetAllMessages().then((emails) => {
         expect(emails.length).to.equal(0);
+        cy.fillMaildev(); // refill your mailbox
       });
     });
   });

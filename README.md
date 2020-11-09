@@ -35,7 +35,6 @@ You can also use env vars in your `cypress.json` as below :
     "MAILDEV_API_PORT": "1080"
   }
 }
-
 ```
 
 ## Commands
@@ -45,6 +44,7 @@ Get all messages received in the Maildev instance.
 ```JavaScript
 cy.maildevGetAllMessages()
 ```
+
 ---
 
 Get the last message received.
@@ -52,6 +52,7 @@ Get the last message received.
 ```JavaScript
 cy.maildevGetLastMessage()
 ```
+
 ---
 
 Each message got an internal ID. If you know it, you can find it directly.
@@ -59,6 +60,26 @@ Each message got an internal ID. If you know it, you can find it directly.
 ```JavaScript
 cy.maildevGetMessageById(id)
 ```
+
+---
+
+You can also directly access to the HTML of your email by calling
+
+> You must have to specify `"chromeWebSecurity": false,` because you will access to another domain than you app.
+> Unfortunately, Cypress can't deactivate the cross-origin requests for Firefox actually.
+
+```JavaScript
+cy.maildevVisitMessageById(id)
+```
+
+And you can simply use Cypress promise to manipulate or assert the DOM of you email :
+
+```JavaScript
+  cy.maildevVisitMessageById(id);
+  cy.get('body h1').should('have.text', 'Email incoming !');
+  cy.get('body a').should('exist').and('have.text', 'click on this link');
+```
+
 ---
 
 Get all messages and find one by containing a specific subject.
@@ -72,7 +93,6 @@ cy.maildevGetMessageBySubject(subject)
 
 Get all messages and find the last containing a sent to address.
 Use a strict string comparison.
-
 
 ```JavaScript
 cy.maildevGetMessageBySentTo()
@@ -96,6 +116,26 @@ cy.maildevDeleteAllMessages()
 
 ---
 
+Get OTP code in an string.
+
+It can be used outside of maildev box.
+
+```JavaScript
+cy.maildevGetOTPCode(string, digits = 6)
+```
+
+Or use with another maildev command
+
+```JavaScript
+  cy.maildevGetMessageBySubject("Your code").then(message => {
+    cy.maildevGetOTPCode(message.text).then(code => {
+      // Do something with the code
+    });
+  });
+```
+
+---
+
 Simple test command that return true if Maildev is opened.
 
 ```JavaScript
@@ -112,9 +152,11 @@ Before starting e2e tests, we will execute `fillEmail.js` script that add a bunc
 You can now run at the root `yarn test`.
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)

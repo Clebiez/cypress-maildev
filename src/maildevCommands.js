@@ -8,21 +8,23 @@ class MaildevCommands {
       "maildevGetAllMessages",
       "maildevGetLastMessage",
       "maildevGetMessageById",
+      "maildevVisitMessageById",
       "maildevGetMessageBySubject",
       "maildevGetMessageBySentTo",
       "maildevDeleteMessageById",
+      "maildevGetOTPCode",
       "maildevDeleteAllMessages",
       "maildevHealthcheck",
     ];
   }
 
   constructor() {
-    const baseUrl = `http://${Cypress.env("MAILDEV_HOST")}:${Cypress.env(
+    this.baseUrl = `http://${Cypress.env("MAILDEV_HOST")}:${Cypress.env(
       "MAILDEV_API_PORT"
     )}`;
 
     this.request = new Request({
-      baseUrl,
+      baseUrl: this.baseUrl,
     });
   }
 
@@ -38,6 +40,10 @@ class MaildevCommands {
 
   maildevGetMessageById(id) {
     return this.request.get(`/email/${id}`);
+  }
+
+  maildevVisitMessageById(id) {
+    cy.visit(`${this.baseUrl}/email/${id}/html`);
   }
 
   maildevGetMessageBySubject(string) {
@@ -58,6 +64,12 @@ class MaildevCommands {
 
   maildevDeleteMessageById(id) {
     return this.request.delete(`/email/${id}`);
+  }
+
+  maildevGetOTPCode(string, digits = 6) {
+    const OTP_REGEXP = new RegExp("\\d{" + digits + "}");
+    const res = string.match(OTP_REGEXP);
+    return res ? res[0] : null;
   }
 
   maildevDeleteAllMessages() {

@@ -1,4 +1,5 @@
 {
+  "chromeWebSecurity": false,
   "env": {
     "MAILDEV_HOST": "localhost",
     "MAILDEV_SMTP_PORT": "1025",
