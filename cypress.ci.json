@@ -1,0 +1,8 @@
+{
+  "chromeWebSecurity": false,
+  "env": {
+    "MAILDEV_HOST": "maildev",
+    "MAILDEV_SMTP_PORT": "25",
+    "MAILDEV_API_PORT": "80"
+  }
+}

@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  maildev:
+    image: maildev/maildev
+    ports:
+      - "1080:80"
+      - "1025:25"
+  cypress:
+    build: .
+    depends_on:
+      - maildev
+    command: npx cypress run
+    links:
+      - "maildev:maildev"
+
