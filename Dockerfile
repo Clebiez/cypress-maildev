@@ -7,3 +7,4 @@ RUN ./node_modules/.bin/cypress verify
 # Bundle app source
 COPY . .
 COPY cypress.ci.json ./cypress.json
+
