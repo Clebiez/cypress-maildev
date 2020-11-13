@@ -28,4 +28,4 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: E2E Tests
-        run: docker-compose up
+        run: docker-compose up -d
