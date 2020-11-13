@@ -1,6 +1,6 @@
 # Cypress Maildev
 
-Cypress Maildev is a bunch of Cypress commands in order to use [Maildev REST API](https://github.com/maildev/maildev/blob/master/docs/rest.md).
+Cypress Maildev is a bunch of Cypress commands in order to test your messages (SMS and Emails) by using [Maildev REST API](https://github.com/maildev/maildev/blob/master/docs/rest.md).
 
 ![CI](https://github.com/Clebiez/cypress-maildev/workflows/CI/badge.svg?branch=main) [![npm version](https://badge.fury.io/js/cypress-maildev.svg)](https://badge.fury.io/js/cypress-maildev)
 
