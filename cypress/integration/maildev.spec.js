@@ -33,8 +33,8 @@ describe("Maildev recipes", () => {
     it("Should display maildev webapp with message", () => {
       cy.maildevGetAllMessages().then((emails) => {
         cy.maildevVisitMessageById(emails[2].id);
-        cy.get('body h1').should('have.text', 'Email incoming !');
-        cy.get('body a').should('exist').and('have.text', 'click on this link');
+        cy.get("body h1").should("have.text", "Email incoming !");
+        cy.get("body a").should("exist").and("have.text", "click on this link");
       });
     });
   });
@@ -43,6 +43,12 @@ describe("Maildev recipes", () => {
     it("Should find a message by the subject.", () => {
       cy.maildevGetMessageBySubject("I'm another email").then((email) => {
         expect(email.subject).to.equal("I'm another email");
+      });
+    });
+
+    it("Should return null by trying to find a message by the subject.", () => {
+      cy.maildevGetMessageBySubject("Unknown subject").then((email) => {
+        expect(email).to.equal(null);
       });
     });
   });
@@ -57,6 +63,12 @@ describe("Maildev recipes", () => {
     it("Should find the last message by a sent to address.", () => {
       cy.maildevGetMessageBySentTo("anotheremail@example.com").then((email) => {
         expect(email.subject).to.equal("I'm the last email sent !");
+      });
+    });
+
+    it("Should return null because e-mail has never been used", () => {
+      cy.maildevGetMessageBySentTo("notexist@example.com").then((email) => {
+        expect(email).to.be.equal(null);
       });
     });
   });

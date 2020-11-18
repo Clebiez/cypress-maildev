@@ -19,9 +19,13 @@ class MaildevCommands {
   }
 
   constructor() {
-    this.baseUrl = `http://${Cypress.env("MAILDEV_HOST")}:${Cypress.env(
-      "MAILDEV_API_PORT"
+    this.baseUrl = `${Cypress.env("MAILDEV_PROTOCOL")}://${Cypress.env(
+      "MAILDEV_HOST"
     )}`;
+
+    if (Cypress.env("MAILDEV_API_PORT")) {
+      this.baseUrl += `:${Cypress.env("MAILDEV_API_PORT")}`;
+    }
 
     this.request = new Request({
       baseUrl: this.baseUrl,
@@ -48,17 +52,21 @@ class MaildevCommands {
 
   maildevGetMessageBySubject(string) {
     return this.maildevGetAllMessages().then((emails) => {
-      return emails.find((email) => email.subject === string);
+      return emails.reverse().find((email) => email.subject === string) || null;
     });
   }
 
   maildevGetMessageBySentTo(address) {
-    return this.maildevGetAllMessages().then((emails) => {
-      return emails.reverse().find((email) => {
-        return !!email.to.find((to) => {
-          return to.address === address;
-        });
-      });
+    return this.maildevGetAllMessages().then((messages) => {
+      const reversedMessages = messages.reverse();
+      for (const message of reversedMessages) {
+        for (const to of message.to) {
+          if (to.address === address) {
+            return message;
+          }
+        }
+      }
+      return null;
     });
   }
 
