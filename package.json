@@ -1,6 +1,6 @@
 {
   "name": "cypress-maildev",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "An easy-to-use cypress bunch of commands to use Maildev API for tests messages reception !",
   "main": "index.js",
   "repository": "https://github.com/Clebiez/cypress-maildev.git",
@@ -19,7 +19,7 @@
     "mail"
   ],
   "devDependencies": {
-    "cypress": "^5.5.0",
+    "cypress": "^6.0",
     "eslint": "^7.12.1",
     "nodemailer": "^6.4.14"
   }

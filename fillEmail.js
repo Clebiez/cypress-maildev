@@ -1,5 +1,4 @@
 const nodemailer = require("nodemailer");
-console.log(process.argv);
 const transporter = nodemailer.createTransport({
   host: process.argv[2] || 'localhost',
   port: process.argv[3] || 1025,
