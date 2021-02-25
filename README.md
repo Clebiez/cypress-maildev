@@ -40,7 +40,7 @@ You can also use env vars in your `cypress.json` as below :
 }
 ```
 
-> For what response's body should be, please refer to [Maildev REST API documentation](https://github.com/maildev/maildev/blob/master/docs/rest.md)
+> For how response's body should be, please refer to [Maildev REST API documentation](https://github.com/maildev/maildev/blob/master/docs/rest.md)
 
 ## Commands
 
