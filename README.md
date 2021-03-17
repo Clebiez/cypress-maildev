@@ -171,15 +171,21 @@ You can use the little node script inside the `tests` folder in order to send mu
 
 Before starting e2e tests, we will execute `fillEmail.js` script automatically in order to add a some default emails for testing our commands.
 
-You can now run at the root `npm run test`.
+You can now run at the root `make test`.
 
-> You can also mount and execute commands with the docker-compose.yml. `docker-compose build && docker-compose run cypress`
+> You can also mount and execute commands with the docker-compose.yml. `make build`
 
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
+- Clone the repo 
+
+- Install dependencies: `make install`
+
+- Start maildev: `make start` 
+
+Please make sure to update tests as appropriate and run `make test` command
 
 ## License
 

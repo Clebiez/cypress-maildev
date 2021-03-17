@@ -24,8 +24,8 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Building cypress service
-        run: docker-compose build
+        run: make build
 
       # Runs a set of commands using the runners shell
       - name: E2E Tests
-        run: docker-compose run cypress
+        run: make test

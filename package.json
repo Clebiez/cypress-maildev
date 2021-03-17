@@ -19,7 +19,7 @@
     "mail"
   ],
   "devDependencies": {
-    "cypress": "^6.5.0",
+    "cypress": "^6.7.0",
     "eslint": "^7.20.0",
     "nodemailer": "^6.4.18"
   }
