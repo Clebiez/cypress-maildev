@@ -56,7 +56,7 @@ Using one of this commands must be like this example :
   });
 ```
 
-And for more examples you can cehck directly the [file test](./cypress/integration/maildev.spec.js).
+For more examples you can check directly the [file test](./cypress/integration/maildev.spec.js).
 
 ### Documentation
 
