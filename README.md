@@ -164,17 +164,6 @@ Simple test command that return true if Maildev is opened.
 cy.maildevHealthcheck()
 ```
 
-## Tests
-
-Don't forget to start maildev.
-You can use the little node script inside the `tests` folder in order to send multiple mails inside your maildev instance.
-
-Before starting e2e tests, we will execute `fillEmail.js` script automatically in order to add a some default emails for testing our commands.
-
-You can now run at the root `make test`.
-
-> You can also mount and execute commands with the docker-compose.yml. `make build`
-
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
