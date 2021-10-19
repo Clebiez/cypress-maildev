@@ -10,7 +10,7 @@ build: # Build cypress image
 	docker-compose build
 
 start: # Start maildev for development purpose
-	docker-compose up maildev -d --force-recreate
+	docker-compose up -d maildev
 
 test: # Launch cypress test
 	docker-compose run cypress
