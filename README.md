@@ -23,7 +23,7 @@ require('cypress-maildev');
 
 ### 2. Specify your maildev address
 
-> By default, Maildev API is started at the `http://localhost:1080`. So if you choose to don't use another host, you have nothing to do.
+> By default, Maildev API is started at the `http://localhost:1080`. If you are using default maildev instace, you have nothing to configure.
 
 You can also use env vars in your `cypress.json` as below :
 
@@ -40,7 +40,20 @@ You can also use env vars in your `cypress.json` as below :
 }
 ```
 
-> For how response's body should be, please refer to [Maildev REST API documentation](https://github.com/maildev/maildev/blob/master/docs/rest.md)
+For example, by using like this project a docker compose with **cypress** and **maildev** containers, you have to configure your `cypress.json` like this:
+
+```json
+{
+  "env": {
+    "MAILDEV_PROTOCOL": "http",
+    "MAILDEV_HOST": "maildev",
+    "MAILDEV_SMTP_PORT": "25",
+    "MAILDEV_API_PORT": "80"
+  }
+}
+```
+
+> Check the [Maildev REST API documentation](https://github.com/maildev/maildev/blob/master/docs/rest.md) for what you can expect in responses.
 
 ## Commands
 
@@ -56,7 +69,7 @@ Using one of this commands must be like this example :
   });
 ```
 
-For more examples you can check directly the [file test](./cypress/integration/maildev.spec.js).
+For more examples you can check directly the [test file](./cypress/integration/maildev.spec.js).
 
 ### Documentation
 
@@ -76,7 +89,7 @@ cy.maildevGetLastMessage()
 
 ---
 
-Each message got an internal ID. If you know it, you can find it directly.
+Each messages got an internal ID. If you know it, you can find it directly.
 
 ```JavaScript
 cy.maildevGetMessageById(id: String)
@@ -90,7 +103,7 @@ You can also directly access to the HTML of your email by calling.
 cy.maildevVisitMessageById(id: String)
 ```
 
-And you can simply use Cypress promise to manipulate or assert the DOM of you email :
+And you can use Cypress promise to manipulate or assert the DOM of your email :
 
 ```JavaScript
   cy.maildevVisitMessageById(id: String);
@@ -104,7 +117,7 @@ And you can simply use Cypress promise to manipulate or assert the DOM of you em
 ---
 
 Get all messages and find one by containing a specific subject.
-We use a simple string detection case-sensitive.
+It's a simple string detection case-sensitive.
 
 ```JavaScript
 cy.maildevGetMessageBySubject(subject: String)
@@ -138,9 +151,8 @@ cy.maildevDeleteAllMessages()
 ---
 
 Get an OTP code from a string.
-It can be used **outside of maildev box** because it doesn't use maildev API but generrally OTP code are sent by messages.
+It can be used **outside of maildev box** because it doesn't use maildev API but generally OTP code are sent by messages.
 This function find in a string a specific amount of digits (default 6).
-
 
 ```JavaScript
 cy.maildevGetOTPCode(string, digits = 6)
@@ -160,7 +172,7 @@ Or use with another maildev command
 
 Simple test command that return true if Maildev is opened.
 
-```JavaScript 
+```JavaScript
 cy.maildevHealthcheck()
 ```
 
@@ -168,11 +180,11 @@ cy.maildevHealthcheck()
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-- Clone the repo 
+- Clone the repo
 
 - Install dependencies: `make install`
 
-- Start maildev: `make start` 
+- Start maildev: `make start`
 
 Please make sure to update tests as appropriate and run `make test` command
 
