@@ -23,34 +23,36 @@ require('cypress-maildev');
 
 ### 2. Specify your maildev address
 
-> By default, Maildev API is started at the `http://localhost:1080`. If you are using default maildev instace, you have nothing to configure.
+> By default, Maildev API is started at the `http://localhost:1080`. If you are using default maildev instance, you have nothing to do!
 
-You can also use env vars in your `cypress.json` as below :
+You can also use env vars in your `cypress.config.js` as below :
 
-```json
-// cypress/cypress.json
+```javascript
+const { defineConfig } = require("cypress");
 
-{
-  "env": {
-    "MAILDEV_PROTOCOL": "http",
-    "MAILDEV_HOST": "localhost",
-    "MAILDEV_SMTP_PORT": "1025",
-    "MAILDEV_API_PORT": "1080"
-  }
-}
+module.exports = defineConfig({
+  env: {
+    MAILDEV_PROTOCOL: "http",
+    MAILDEV_HOST: "localhost",
+    MAILDEV_SMTP_PORT: "1025",
+    MAILDEV_API_PORT: "1080",
+  },
+});
 ```
 
-For example, by using like this project a docker compose with **cypress** and **maildev** containers, you have to configure your `cypress.json` like this:
+For example, by using like this project a docker compose with **cypress** and **maildev** containers, you have to configure your `cypress.config.js` like this:
 
-```json
-{
-  "env": {
-    "MAILDEV_PROTOCOL": "http",
-    "MAILDEV_HOST": "maildev",
-    "MAILDEV_SMTP_PORT": "25",
-    "MAILDEV_API_PORT": "80"
-  }
-}
+```javascript
+const { defineConfig } = require("cypress");
+
+module.exports = defineConfig({
+  env: {
+    MAILDEV_PROTOCOL: "http",
+    MAILDEV_HOST: "localhost",
+    MAILDEV_SMTP_PORT: "1025",
+    MAILDEV_API_PORT: "1080",
+  },
+});
 ```
 
 > Check the [Maildev REST API documentation](https://github.com/maildev/maildev/blob/master/docs/rest.md) for what you can expect in responses.
