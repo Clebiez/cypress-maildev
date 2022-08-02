@@ -8,3 +8,4 @@ RUN ./node_modules/.bin/cypress verify
 COPY . .
 COPY cypress.config.ci.js ./cypress.config.js
 
+CMD ["cat ./cypress.config.js"]

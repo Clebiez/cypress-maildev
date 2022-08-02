@@ -5,11 +5,3 @@ services:
     ports:
       - "1080:80"
       - "1025:25"
-  cypress:
-    build: .
-    depends_on:
-      - maildev
-    command: npx cypress run
-    links:
-      - "maildev:maildev"
-

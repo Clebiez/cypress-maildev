@@ -7,6 +7,7 @@
   "author": "Clément Le Biez <clement.lebiez@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "wait-on": "wait-on http://localhost:1080",
     "test": "npx cypress open",
     "e2e": "npx cypress run",
     "fillEmail": "node ./fillEmail.js"
@@ -22,5 +23,8 @@
     "cypress": "^10.2.0",
     "eslint": "^8.18.0",
     "nodemailer": "^6.7.5"
+  },
+  "dependencies": {
+    "wait-on": "^6.0.1"
   }
 }
