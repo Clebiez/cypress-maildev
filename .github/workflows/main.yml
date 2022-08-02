@@ -6,9 +6,9 @@ name: CI
 # events but only for the main branch
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -21,11 +21,19 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Building cypress service
-        run: make build
-
-      # Runs a set of commands using the runners shell
-      - name: E2E Tests
-        run: make test
+      - name: Starting maildev
+        run: make start
+      - uses: ifaxity/wait-on-action
+        with:
+          resource: http://localhost:1080
+      - name: Starting maildev2
+        run: docker-compose ps
+      - name: Curl Maildev
+        run: curl http://localhost:1080/#/
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          wait-on: "http://localhost:1080"
+          wait-on-timeout: 120
+          build: make install
+          start: make test

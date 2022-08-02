@@ -6,11 +6,11 @@ help: # Display all commands available
 install: # Install dependencies in local
 	npm install
 
-build: # Build cypress image
-	docker-compose build
-
 start: # Start maildev for development purpose
-	docker-compose up -d maildev
+	docker-compose up -d maildev && npm run wait-on
+
+stop: # Stop maildev
+	docker-compose stop
 
 test: # Launch cypress test
-	docker-compose run cypress
+	npm run e2e
