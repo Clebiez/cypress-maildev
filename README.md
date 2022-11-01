@@ -16,7 +16,7 @@ yarn add cypress-maildev --dev
 ### 1. Register the plugin :
 
 ```JavaScript
-// cypress/support/index.js
+// cypress/support/e2e.js
 
 require('cypress-maildev');
 ```
