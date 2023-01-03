@@ -2,7 +2,7 @@
   "name": "cypress-maildev",
   "version": "1.2.0",
   "description": "An easy-to-use cypress bunch of commands to use Maildev API for tests messages reception !",
-  "main": "index.js",
+  "main": "./src/index.ts",
   "repository": "https://github.com/Clebiez/cypress-maildev.git",
   "author": "Clément Le Biez <clement.lebiez@gmail.com>",
   "license": "MIT",
@@ -10,7 +10,10 @@
     "wait-on": "wait-on http://localhost:1080",
     "test": "npx cypress open",
     "e2e": "npx cypress run",
-    "fillEmail": "node ./fillEmail.js"
+    "fillEmail": "node ./fillEmail.js",
+    "dev": "ts-node-dev --respawn  ./src/index.ts",
+    "prod": "tsc --build && node ./build/index.js",
+    "build": "tsc"
   },
   "keywords": [
     "cypress",
@@ -20,9 +23,12 @@
     "mail"
   ],
   "devDependencies": {
+    "@types/node": "^18.11.18",
     "cypress": "^10.2.0",
     "eslint": "^8.18.0",
-    "nodemailer": "^6.7.5"
+    "nodemailer": "^6.7.5",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.4"
   },
   "dependencies": {
     "wait-on": "^6.0.1"

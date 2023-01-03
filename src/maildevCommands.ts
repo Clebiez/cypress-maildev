@@ -1,9 +1,12 @@
 /* global Cypress */
+import { Request } from "./request";
+import { Email } from "./Email";
 
-const Request = require("./request");
+export class MaildevCommands {
+  public baseUrl: string;
+  public request: Request;
 
-class MaildevCommands {
-  static get cypressCommands() {
+  static get cypressCommands(): string[] {
     return [
       "maildevGetAllMessages",
       "maildevGetLastMessage",
@@ -32,31 +35,33 @@ class MaildevCommands {
     });
   }
 
-  maildevGetAllMessages() {
+  maildevGetAllMessages(): Cypress.Chainable<Email[]> {
     return this.request.get("/email");
   }
 
-  maildevGetLastMessage() {
+  maildevGetLastMessage(): Cypress.Chainable<Email> {
     return this.maildevGetAllMessages().then((emails) => {
       return emails[emails.length - 1];
     });
   }
 
-  maildevGetMessageById(id) {
+  maildevGetMessageById(id: string): Cypress.Chainable<Email> {
     return this.request.get(`/email/${id}`);
   }
 
-  maildevVisitMessageById(id) {
+  maildevVisitMessageById(id: string): void {
     cy.visit(`${this.baseUrl}/email/${id}/html`);
   }
 
-  maildevGetMessageBySubject(string) {
+  maildevGetMessageBySubject(str: string): Cypress.Chainable<Email | null> {
     return this.maildevGetAllMessages().then((emails) => {
-      return emails.reverse().find((email) => email.subject === string) || null;
+      return (
+        emails.reverse().find((email: Email) => email.subject === str) || null
+      );
     });
   }
 
-  maildevGetMessageBySentTo(address) {
+  maildevGetMessageBySentTo(address: string): Cypress.Chainable<Email | null> {
     return this.maildevGetAllMessages().then((messages) => {
       const reversedMessages = messages.reverse();
       for (const message of reversedMessages) {
@@ -70,13 +75,13 @@ class MaildevCommands {
     });
   }
 
-  maildevDeleteMessageById(id) {
+  maildevDeleteMessageById(id: string): Cypress.Chainable<any> {
     return this.request.delete(`/email/${id}`);
   }
 
-  maildevGetOTPCode(string, digits = 6) {
+  maildevGetOTPCode(str: string, digits = 6): string | null {
     const OTP_REGEXP = new RegExp("\\d{" + digits + "}");
-    const res = string.match(OTP_REGEXP);
+    const res = str.match(OTP_REGEXP);
     return res ? res[0] : null;
   }
 
@@ -88,5 +93,3 @@ class MaildevCommands {
     return this.request.get("/healthz");
   }
 }
-
-module.exports = MaildevCommands;

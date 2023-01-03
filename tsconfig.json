@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "build",
+    "strict": true,
+    "target": "es6",
+    "types": ["cypress", "node"]
+  },
+  "include": ["src/**/*"]
+}
