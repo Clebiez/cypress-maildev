@@ -10,7 +10,7 @@ build: # Build TS projects
 	npm run build
 
 start: # Start maildev for development purpose
-	docker-compose up -d maildev
+	docker-compose up -d maildev && npm run wait-on
 
 stop: # Stop maildev
 	docker-compose stop

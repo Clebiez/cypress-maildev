@@ -7,7 +7,7 @@
   "author": "Clément Le Biez <clement.lebiez@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "wait-on": "wait-on http://localhost:1080",
+    "wait-on": "wait-on http://127.0.0.1:1080",
     "test": "npx cypress open",
     "e2e": "npx cypress run",
     "fillEmail": "node ./fillEmail.js",
