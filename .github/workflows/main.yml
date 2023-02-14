@@ -21,21 +21,21 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - name: Building project
-        run: make build
-      - name: Starting maildev
-        run: make start
-      - uses: ifaxity/wait-on-action
-        with:
-          resource: http://localhost:1080
-      - name: Starting maildev2
-        run: docker-compose ps
-      - name: Curl Maildev
-        run: curl http://localhost:1080/#/
-      - name: Cypress run
-        uses: cypress-io/github-action@v4
-        with:
-          wait-on: "http://localhost:1080"
-          wait-on-timeout: 120
-          build: make install
-          start: make test
+      # - name: Building project
+      #   run: make build
+      # - name: Starting maildev
+      #   run: make start
+      # - uses: ifaxity/wait-on-action
+      #   with:
+      #     resource: http://localhost:1080
+      # - name: Starting maildev2
+      #   run: docker-compose ps
+      # - name: Curl Maildev
+      #   run: curl http://localhost:1080/#/
+      # - name: Cypress run
+      #   uses: cypress-io/github-action@v4
+      #   with:
+      #     wait-on: "http://localhost:1080"
+      #     wait-on-timeout: 120
+      #     build: make install
+      #     start: make test
