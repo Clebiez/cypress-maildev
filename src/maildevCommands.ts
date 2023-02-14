@@ -1,6 +1,6 @@
 /* global Cypress */
-import { Request } from "./request";
-import { Email } from "./Email";
+import Request from "./request";
+import { Email } from "./types/Email";
 
 export class MaildevCommands {
   public baseUrl: string;
@@ -53,12 +53,10 @@ export class MaildevCommands {
     cy.visit(`${this.baseUrl}/email/${id}/html`);
   }
 
-  maildevGetMessageBySubject(str: string): Cypress.Chainable<Email | null> {
+  maildevGetMessageBySubject(str: string): Cypress.Chainable<Email> {
     return this.maildevGetAllMessages().then((emails) => {
-      return (
-        emails.reverse().find((email: Email) => email.subject === str) || null
-      );
-    });
+      return emails.find((email: Email) => email.subject === str) ?? null;
+    }) as Cypress.Chainable<Email>;
   }
 
   maildevGetMessageBySentTo(address: string): Cypress.Chainable<Email | null> {
@@ -72,7 +70,7 @@ export class MaildevCommands {
         }
       }
       return null;
-    });
+    }) as Cypress.Chainable<Email | null>;
   }
 
   maildevDeleteMessageById(id: string): Cypress.Chainable<any> {
@@ -85,11 +83,11 @@ export class MaildevCommands {
     return res ? res[0] : null;
   }
 
-  maildevDeleteAllMessages() {
+  maildevDeleteAllMessages(): Cypress.Chainable<any> {
     return this.request.delete("/email/all");
   }
 
-  maildevHealthcheck() {
+  maildevHealthcheck(): Cypress.Chainable<any> {
     return this.request.get("/healthz");
   }
 }

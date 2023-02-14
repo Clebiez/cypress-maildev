@@ -1,9 +1,10 @@
 const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
-  host: process.argv[2] || 'localhost',
+  host: process.argv[2] || '127.0.0.1',
   port: process.argv[3] || 1025,
   ignoreTLS: true,
 });
+
 
 const emails = [
   {

@@ -6,7 +6,7 @@ export interface RequestConstructorParams {
 
 export type Method = "POST" | "GET" | "PUT" | "DELETE";
 
-export class Request {
+export default class Request {
   public baseUrl: string;
   public headers: {
     [key: string]: string;
@@ -26,10 +26,11 @@ export class Request {
       headers: {
         Accept: this.headers.Accept,
       },
+      body: {},
     };
   }
 
-  request(method: Method, path: string, body?: object) {
+  request(method: Method, path: string, body?: any) {
     const options = this.buildOptions(method, path);
     options.body = body || undefined;
     return cy.request(options).its("body");

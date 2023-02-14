@@ -13,6 +13,7 @@
     "fillEmail": "node ./fillEmail.js",
     "dev": "ts-node-dev --respawn  ./src/index.ts",
     "prod": "tsc --build && node ./build/index.js",
+    "prepare" : "npm run build",
     "build": "tsc"
   },
   "keywords": [
