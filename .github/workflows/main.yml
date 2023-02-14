@@ -21,8 +21,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - name: Building project
-        run: make build
       - name: Starting maildev
         run: make start
       - uses: iFaxity/wait-on-action@v1
@@ -37,5 +35,5 @@ jobs:
         with:
           wait-on: "http://localhost:1080"
           wait-on-timeout: 120
-          build: make install
+          build: make install build
           start: make test
