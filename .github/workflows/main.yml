@@ -22,7 +22,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       - name: Starting maildev
-        run: make start
+        run: make install start
       - uses: iFaxity/wait-on-action@v1
         with:
           resource: http://127.0.0.1:1080
