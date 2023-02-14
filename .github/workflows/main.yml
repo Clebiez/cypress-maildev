@@ -20,14 +20,12 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout project
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Building project
         run: make build
       - name: Starting maildev
         run: make start
-      - name: Wait maildev server
-        uses: ifaxity/wait-on-action
+      - uses: ifaxity/wait-on-action
         with:
           resource: http://localhost:1080
       - name: Starting maildev2
