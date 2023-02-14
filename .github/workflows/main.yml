@@ -23,11 +23,17 @@ jobs:
       - uses: actions/checkout@v3
       - name: Starting maildev
         run: make start
+      - name: Curl Maildev
+        run: curl http://127.0.0.1:1080/#/
       - uses: iFaxity/wait-on-action@v1
         with:
-          resource: http://localhost:1080
+          resource: http://127.0.0.1:1080
+      - name: Curl Maildev2
+        run: curl http://127.0.0.1:1080/#/
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
-          build: make build
+          wait-on: "http://localhost:1080"
+          wait-on-timeout: 120
+          build: make install build
           start: make test
