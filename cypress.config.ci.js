@@ -4,7 +4,7 @@ module.exports = defineConfig({
   chromeWebSecurity: false,
   env: {
     MAILDEV_PROTOCOL: "http",
-    MAILDEV_HOST: "127.0.0.1",
+    MAILDEV_HOST: "localhost",
     MAILDEV_SMTP_PORT: "1025",
     MAILDEV_API_PORT: "1080",
   },
