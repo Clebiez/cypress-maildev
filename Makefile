@@ -6,6 +6,9 @@ help: # Display all commands available
 install: # Install dependencies in local
 	npm install
 
+build: # Build TS projects
+	npm run build
+
 start: # Start maildev for development purpose
 	docker-compose up -d maildev && npm run wait-on
 

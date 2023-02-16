@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "declaration": true,
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "outDir": "build",
+    "strict": true,
+    "target": "es6",
+    "types": ["cypress", "node"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
