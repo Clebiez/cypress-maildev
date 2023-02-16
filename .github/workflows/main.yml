@@ -34,4 +34,3 @@ jobs:
           wait-on: "http://localhost:1080"
           wait-on-timeout: 120
           build: make install build
-          start: make test
