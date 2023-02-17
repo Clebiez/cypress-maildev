@@ -1,0 +1,18 @@
+
+# Code
+cypress/
+fillEmail.js
+cypress.config.js
+cypress.config.ci.js
+
+# Common
+node_modules/
+.gitignore
+
+# Config
+tsconfig.json
+Makefile
+.dockerignore
+Dockerfile
+docker-compose.yml
+.eslintrc.js
