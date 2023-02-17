@@ -16,6 +16,6 @@
 // Import commands.js using ES2015 syntax:
 
 // Alternatively you can use CommonJS syntax:
-require('./commands')
+import "./commands";
 
-require('../../build/index.js');
+import "../../build/index.js";

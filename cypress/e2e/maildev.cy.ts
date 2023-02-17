@@ -1,5 +1,5 @@
 describe("Maildev recipes", () => {
-  before(() => {
+  beforeEach(() => {
     cy.fillMaildev();
   });
 
@@ -113,7 +113,6 @@ describe("Maildev recipes", () => {
 
     it("Should get OTP code from a message", () => {
       cy.maildevGetMessageBySubject("Your OTP code").then((message) => {
-        cy.log(message);
         cy.maildevGetOTPCode(message.text).then((code) => {
           expect(code).to.equal("012345");
         });
