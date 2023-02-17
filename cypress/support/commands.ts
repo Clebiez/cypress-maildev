@@ -7,4 +7,3 @@ Cypress.Commands.add("fillMaildev", () => {
     );
   });
 });
-

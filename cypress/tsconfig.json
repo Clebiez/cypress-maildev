@@ -4,11 +4,10 @@
     "declaration": true,
     "module": "commonjs",
     "noImplicitAny": true,
-    "outDir": "build",
     "strict": true,
-    "target": "es5",
+    "target": "es6",
     "types": ["cypress", "node"]
   },
-  "include": ["src/**/*"],
+  "include": ["./**/*.ts"],
   "exclude": ["node_modules"]
 }

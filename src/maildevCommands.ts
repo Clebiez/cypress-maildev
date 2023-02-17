@@ -77,10 +77,10 @@ export class MaildevCommands {
     return this.request.delete(`/email/${id}`);
   }
 
-  maildevGetOTPCode(str: string, digits = 6): string | null {
+  maildevGetOTPCode(str: string, digits = 6): Cypress.Chainable<string | null> {
     const OTP_REGEXP = new RegExp("\\d{" + digits + "}");
     const res = str.match(OTP_REGEXP);
-    return res ? res[0] : null;
+    return cy.wrap(res ? res[0] : null);
   }
 
   maildevDeleteAllMessages(): Cypress.Chainable<any> {

@@ -9,7 +9,7 @@ declare global {
        * Command to get all messages received inside Maildev.
        * @example cy.maildevGetAllMessages()
        */
-      maildevGetAllMessages(): Chainable<Email[]>;
+      maildevGetAllMessages(): Cypress.Chainable<Email[]>;
 
       /**
        * Command to get the last message received inside Maildev.
@@ -18,10 +18,22 @@ declare global {
       maildevGetLastMessage(): Cypress.Chainable<Email>;
 
       /**
-       * Command to get a message by his Maildev ID.
-       * @example cy.maildevGetAllMessages()
+       * Command to get a message by its subject.
+       * @example cy.maildevGetMessageBySubject("My subject")
+       */
+      maildevGetMessageBySubject(subject: string): Cypress.Chainable<Email>;
+
+      /**
+       * Command to get a message by its Maildev ID.
+       * @example cy.maildevGetMessageById("MESSAGE_ID")
        */
       maildevGetMessageById(id: string): Cypress.Chainable<Email>;
+
+      /**
+       * Command to get a message sent to an email.
+       * @example cy.maildevGetMessageBySentTo("john.do@example.com")
+       */
+      maildevGetMessageBySentTo(email: string): Cypress.Chainable<Email>;
 
       /**
        * Command to visit Maildev frontend app directly to the view of an email by using his Maildev ID.
@@ -36,7 +48,10 @@ declare global {
        * From a string, extract a OTP code pattern
        * @example cy.maildevGetAllMessages("my code is 123456", 6) => '123456'
        */
-      maildevGetOTPCode(str: string, digits: number): string | null;
+      maildevGetOTPCode(
+        str: string,
+        digits: number
+      ): Cypress.Chainable<string | null>;
 
       /**
        * Command to delete a message by his Maildev ID.
