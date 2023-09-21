@@ -50,7 +50,9 @@ export class MaildevCommands {
   }
 
   maildevVisitMessageById(id: string): void {
-    cy.visit(`${this.baseUrl}/email/${id}/html`);
+    cy.origin(`${this.baseUrl}`, { args: { id } }, ({ id }) => {
+      cy.visit(`/email/${id}/html`);
+    });
   }
 
   maildevGetMessageBySubject(str: string): Cypress.Chainable<Email> {
