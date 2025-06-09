@@ -1,6 +1,6 @@
 /* global Cypress */
 import Request from "./request";
-import { Email } from "./types/Email";
+import type { Email } from "./types/Email";
 
 export class MaildevCommands {
   public baseUrl: string;
@@ -23,7 +23,7 @@ export class MaildevCommands {
 
   constructor() {
     this.baseUrl = `${Cypress.env("MAILDEV_PROTOCOL")}://${Cypress.env(
-      "MAILDEV_HOST"
+      "MAILDEV_HOST",
     )}`;
 
     if (Cypress.env("MAILDEV_API_PORT")) {
@@ -36,7 +36,7 @@ export class MaildevCommands {
   }
 
   maildevGetAllMessages(): Cypress.Chainable<Email[]> {
-    return this.request.get("/email");
+    return this.request.get<Email[]>("/email");
   }
 
   maildevGetLastMessage(): Cypress.Chainable<Email> {
@@ -46,7 +46,7 @@ export class MaildevCommands {
   }
 
   maildevGetMessageById(id: string): Cypress.Chainable<Email> {
-    return this.request.get(`/email/${id}`);
+    return this.request.get<Email>(`/email/${id}`);
   }
 
   maildevVisitMessageById(id: string): void {
@@ -75,21 +75,21 @@ export class MaildevCommands {
     }) as Cypress.Chainable<Email | null>;
   }
 
-  maildevDeleteMessageById(id: string): Cypress.Chainable<any> {
-    return this.request.delete(`/email/${id}`);
+  maildevDeleteMessageById(id: string): Cypress.Chainable<boolean> {
+    return this.request.delete<boolean>(`/email/${id}`);
   }
 
   maildevGetOTPCode(str: string, digits = 6): Cypress.Chainable<string | null> {
-    const OTP_REGEXP = new RegExp("\\d{" + digits + "}");
+    const OTP_REGEXP = new RegExp(`\\d{${digits}}`);
     const res = str.match(OTP_REGEXP);
     return cy.wrap(res ? res[0] : null);
   }
 
-  maildevDeleteAllMessages(): Cypress.Chainable<any> {
-    return this.request.delete("/email/all");
+  maildevDeleteAllMessages(): Cypress.Chainable<boolean> {
+    return this.request.delete<boolean>("/email/all");
   }
 
-  maildevHealthcheck(): Cypress.Chainable<any> {
-    return this.request.get("/healthz");
+  maildevHealthcheck(): Cypress.Chainable<string> {
+    return this.request.get<string>("/healthz");
   }
 }

@@ -1,5 +1,5 @@
-import { Email } from "./types/Email";
 import { register } from "./register";
+import type { Email } from "./types/Email";
 
 register(Cypress);
 declare global {
@@ -50,26 +50,26 @@ declare global {
        */
       maildevGetOTPCode(
         str: string,
-        digits: number
+        digits: number,
       ): Cypress.Chainable<string | null>;
 
       /**
        * Command to delete a message by his Maildev ID.
        * @example cy.maildevGetAllMessages()
        */
-      maildevDeleteMessageById(id: string): Cypress.Chainable<any>;
+      maildevDeleteMessageById(id: string): Cypress.Chainable<boolean>;
 
       /**
        * Command to delete a message by its Maildev ID.
        * @example cy.maildevGetAllMessages()
        */
-      maildevDeleteAllMessages(): Cypress.Chainable<any>;
+      maildevDeleteAllMessages(): Cypress.Chainable<boolean>;
 
       /**
        * Command to check if Maildev is available, for debug purpose.
        * @example cy.maildevGetAllMessages()
        */
-      maildevHealthcheck(): Cypress.Chainable<any>;
+      maildevHealthcheck(): Cypress.Chainable<string>;
     }
   }
 }

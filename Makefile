@@ -6,6 +6,9 @@ help: # Display all commands available
 install: # Install dependencies in local
 	npm install
 
+lint: # Lint project
+	npm run lint
+
 build: # Build TS projects
 	npm run build
 

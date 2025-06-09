@@ -19,7 +19,7 @@ export default class Request {
     };
   }
 
-  buildOptions(method: Method, path: string) {
+  buildOptions(method: Method, path: string): Partial<Cypress.RequestOptions> {
     return {
       method,
       url: `${this.baseUrl}${path}`,
@@ -30,26 +30,30 @@ export default class Request {
     };
   }
 
-  request(method: Method, path: string, body?: any) {
+  request<T>(
+    method: Method,
+    path: string,
+    body?: Pick<Cypress.RequestOptions, "body">,
+  ): Cypress.Chainable<T> {
     const options = this.buildOptions(method, path);
     options.body = body || undefined;
     return cy.request(options).its("body");
   }
 
-  get(path: string) {
-    return this.request("GET", path);
+  get<T>(path: string) {
+    return this.request<T>("GET", path);
   }
 
-  post(path: string, body: object) {
-    return this.request("POST", path, body);
+  post<T>(path: string, body: Pick<Cypress.RequestOptions, "body">) {
+    return this.request<T>("POST", path, body);
   }
 
-  put(path: string, body: object) {
-    return this.request("PUT", path, body);
+  put<T>(path: string, body: Pick<Cypress.RequestOptions, "body">) {
+    return this.request<T>("PUT", path, body);
   }
 
-  delete(path: string) {
-    return this.request("DELETE", path);
+  delete<T>(path: string) {
+    return this.request<T>("DELETE", path);
   }
 }
 

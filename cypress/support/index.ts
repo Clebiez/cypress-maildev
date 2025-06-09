@@ -7,7 +7,7 @@ declare global {
        * Custom command to populate maildev with dumb emails
        * @example cy.fillMaildev()
        */
-      fillMaildev(): Chainable<any>;
+      fillMaildev(): Chainable<Cypress.Exec>;
     }
   }
 }
