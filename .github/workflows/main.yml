@@ -33,11 +33,5 @@ jobs:
       - uses: iFaxity/wait-on-action@v1
         with:
           resource: http://127.0.0.1:1080
-      - name: Curl Maildev2
-        run: curl http://127.0.0.1:1080/#/
       - name: Cypress run
         uses: cypress-io/github-action@v4
-        with:
-          wait-on: "http://localhost:1080"
-          wait-on-timeout: 120
-          build: make install build test
