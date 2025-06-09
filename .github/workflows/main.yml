@@ -30,8 +30,5 @@ jobs:
         run: make build
       - name: Starting maildev
         run: make start
-      - uses: iFaxity/wait-on-action@v1
-        with:
-          resource: http://127.0.0.1:1080
       - name: Cypress run
         uses: cypress-io/github-action@v4
