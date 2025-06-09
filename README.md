@@ -71,7 +71,7 @@ Using one of this commands must be like this example :
   });
 ```
 
-For more examples you can check directly the [test file](./cypress/integration/maildev.spec.js).
+For more examples you can check directly the [test file](./cypress/e2e/maildev.cy.ts).
 
 ### Documentation
 

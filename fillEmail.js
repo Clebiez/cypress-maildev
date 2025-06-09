@@ -1,10 +1,9 @@
 const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
-  host: process.argv[2] || '127.0.0.1',
+  host: process.argv[2] || "127.0.0.1",
   port: process.argv[3] || 1025,
   ignoreTLS: true,
 });
-
 
 const emails = [
   {
@@ -23,8 +22,7 @@ const emails = [
     from: "mailer@example.com",
     to: "secondemail@example.com, anotheremail@example.com",
     subject: "I'm another email",
-    html:
-      "<html><body><h1>Email incoming !</h1><a href='#'>click on this link</a></body></html>",
+    html: "<html><body><h1>Email incoming !</h1><a href='#'>click on this link</a></body></html>",
   },
   {
     from: "mailer@example.com",
@@ -35,11 +33,11 @@ const emails = [
 ];
 
 const sendEmailsRecursive = (i = 0) => {
-  transporter.sendMail(emails[i], function (error, info) {
+  transporter.sendMail(emails[i], (error, info) => {
     if (error) {
       console.log(error);
     } else {
-      console.log("Email sent: " + info.response);
+      console.log(`Email sent: ${info.response}`);
       if (i < emails.length - 1) {
         sendEmailsRecursive(i + 1);
       }

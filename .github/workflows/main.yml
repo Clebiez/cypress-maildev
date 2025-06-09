@@ -9,6 +9,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -21,16 +22,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      - name: Install Dependencies
+        run: make install
+      - name: Lint project
+        run: make lint
+      - name: Build project
+        run: make build
       - name: Starting maildev
-        run: make install start
-      - uses: iFaxity/wait-on-action@v1
-        with:
-          resource: http://127.0.0.1:1080
-      - name: Curl Maildev2 
-        run: curl http://127.0.0.1:1080/#/
+        run: make start
       - name: Cypress run
         uses: cypress-io/github-action@v4
-        with:
-          wait-on: "http://localhost:1080"
-          wait-on-timeout: 120
-          build: make install build

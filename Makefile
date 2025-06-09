@@ -6,14 +6,20 @@ help: # Display all commands available
 install: # Install dependencies in local
 	npm install
 
+lint: # Lint project
+	npm run lint
+
+lint-fix: # Lint project
+	npm run lint-fix
+
 build: # Build TS projects
 	npm run build
 
 start: # Start maildev for development purpose
-	docker-compose up -d maildev && npm run wait-on
+	docker run --name maildev -d -p 1080:1080 -p 1025:1025 maildev/maildev && npm run wait-on
 
 stop: # Stop maildev
-	docker-compose stop
+	docker stop maildev && docker rm maildev
 
 test: # Launch cypress test
 	npm run e2e

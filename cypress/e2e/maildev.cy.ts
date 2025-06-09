@@ -87,7 +87,7 @@ describe("Maildev recipes", () => {
   describe("maildevGetOTPCode", () => {
     it("Should return the OTP code", () => {
       cy.maildevGetOTPCode(
-        "Hi, your OTP code is 012345, please do not share it"
+        "Hi, your OTP code is 012345, please do not share it",
       ).then((code) => {
         expect(code).to.equal("012345");
       });
@@ -96,7 +96,7 @@ describe("Maildev recipes", () => {
     it("Should return the OTP code with 8 digits", () => {
       cy.maildevGetOTPCode(
         "Hi, your OTP code is 01234567, please do not share it",
-        8
+        8,
       ).then((code) => {
         expect(code).to.equal("01234567");
       });
@@ -105,7 +105,7 @@ describe("Maildev recipes", () => {
     it("Should return null if no OTP code exist", () => {
       cy.maildevGetOTPCode(
         "Hi, your OTP code is 012345, please do not share it",
-        8
+        8,
       ).then((code) => {
         expect(code).to.equal(null);
       });
