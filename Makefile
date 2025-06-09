@@ -9,6 +9,9 @@ install: # Install dependencies in local
 lint: # Lint project
 	npm run lint
 
+lint-fix: # Lint project
+	npm run lint-fix
+
 build: # Build TS projects
 	npm run build
 
