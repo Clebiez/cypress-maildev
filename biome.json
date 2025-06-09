@@ -7,7 +7,14 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": [".vscode", "node_modules", "build", "coverage", ".github"]
+    "ignore": [
+      ".vscode",
+      "node_modules",
+      "build",
+      "coverage",
+      ".github",
+      "./package.json"
+    ]
   },
   "formatter": {
     "enabled": true,
