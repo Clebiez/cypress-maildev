@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.1.3/schema.json",
   "vcs": {
     "enabled": false,
     "clientKind": "git",
@@ -7,13 +7,14 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": [
-      ".vscode",
-      "node_modules",
-      "build",
-      "coverage",
-      ".github",
-      "./package.json"
+    "includes": [
+      "**",
+      "!**/.vscode",
+      "!**/node_modules",
+      "!**/build",
+      "!**/coverage",
+      "!**/.github",
+      "!package.json"
     ]
   },
   "formatter": {
@@ -21,9 +22,7 @@
     "indentStyle": "space",
     "indentWidth": 2
   },
-  "organizeImports": {
-    "enabled": true
-  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
     "rules": {
