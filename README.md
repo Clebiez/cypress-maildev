@@ -31,7 +31,7 @@ You can also use env vars in your `cypress.config.js` as below :
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  env: {
+  expose: {
     MAILDEV_PROTOCOL: "http",
     MAILDEV_HOST: "localhost",
     MAILDEV_SMTP_PORT: "1025",

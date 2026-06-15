@@ -22,12 +22,13 @@ export class MaildevCommands {
   }
 
   constructor() {
-    this.baseUrl = `${Cypress.env("MAILDEV_PROTOCOL")}://${Cypress.env(
+    console.log("MAILDEV_PROTOCOL", Cypress.expose("MAILDEV_PROTOCOL"));
+    this.baseUrl = `${Cypress.expose("MAILDEV_PROTOCOL")}://${Cypress.expose(
       "MAILDEV_HOST",
     )}`;
 
-    if (Cypress.env("MAILDEV_API_PORT")) {
-      this.baseUrl += `:${Cypress.env("MAILDEV_API_PORT")}`;
+    if (Cypress.expose("MAILDEV_API_PORT")) {
+      this.baseUrl += `:${Cypress.expose("MAILDEV_API_PORT")}`;
     }
 
     this.request = new Request({
