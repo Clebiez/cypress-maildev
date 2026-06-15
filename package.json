@@ -3,7 +3,10 @@
   "version": "2.0.0",
   "description": "An easy-to-use cypress bunch of commands to use Maildev API for tests messages reception !",
   "main": "./build/index.js",
-  "repository": "https://github.com/Clebiez/cypress-maildev.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Clebiez/cypress-maildev.git"
+  },
   "author": "Clément Le Biez <clement.lebiez@gmail.com>",
   "license": "MIT",
   "scripts": {
