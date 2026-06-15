@@ -2,7 +2,8 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   chromeWebSecurity: false,
-  env: {
+  allowCypressEnv: false,
+  expose: {
     MAILDEV_PROTOCOL: "http",
     MAILDEV_HOST: "127.0.0.1",
     MAILDEV_SMTP_PORT: "1025",
