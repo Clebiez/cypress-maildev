@@ -46,7 +46,7 @@ For example, by using like this project a docker compose with **cypress** and **
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  env: {
+  expose: {
     MAILDEV_PROTOCOL: "http",
     MAILDEV_HOST: "127.0.0.1",
     MAILDEV_SMTP_PORT: "1025",
