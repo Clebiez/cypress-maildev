@@ -31,8 +31,7 @@ export class MaildevCommands {
       this.baseUrl += `:${Cypress.expose("MAILDEV_API_PORT")}`;
     }
 
-    // Maildev 3 serves its REST API under /api. Set MAILDEV_API_PATH to "" for maildev 2.
-    this.apiPath = Cypress.expose("MAILDEV_API_PATH") ?? "/api";
+    this.apiPath = Cypress.expose("MAILDEV_VERSION_2") ? "" : "/api";
 
     this.request = new Request({
       baseUrl: `${this.baseUrl}${this.apiPath}`,

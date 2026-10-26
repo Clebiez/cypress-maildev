@@ -36,12 +36,12 @@ module.exports = defineConfig({
     MAILDEV_HOST: "localhost",
     MAILDEV_SMTP_PORT: "1025",
     MAILDEV_API_PORT: "1080",
-    MAILDEV_API_PATH: "/api",
+    MAILDEV_VERSION_2: false,
   },
 });
 ```
 
-`MAILDEV_API_PATH` defaults to `/api`, where maildev 3 serves its REST API. Running maildev 2 instead? Set `MAILDEV_API_PATH: ""`.
+Targets maildev 3, which serves its REST API under `/api`. Running maildev 2 instead? Set `MAILDEV_VERSION_2: true`.
 
 For example, by using like this project a docker compose with **cypress** and **maildev** containers, you have to configure your `cypress.config.js` like this:
 
@@ -54,7 +54,7 @@ module.exports = defineConfig({
     MAILDEV_HOST: "127.0.0.1",
     MAILDEV_SMTP_PORT: "1025",
     MAILDEV_API_PORT: "1080",
-    MAILDEV_API_PATH: "/api",
+    MAILDEV_VERSION_2: false,
   },
 });
 ```
