@@ -7,8 +7,7 @@ Cypress Maildev is a bunch of Cypress commands in order to test your messages (S
 ## Installation
 
 ```bash
-npm install cypress-maildev --save-dev
-yarn add cypress-maildev --dev
+pnpm add --save-dev cypress-maildev
 ```
 
 ## Usage
@@ -187,12 +186,12 @@ cy.maildevHealthcheck()
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 - Clone the repo
+- Install mise and the pinned tools with `mise install`
+- Install dependencies with `make install`
+- Start maildev with `make start`
+- Run tests with `make test`
 
-- Install dependencies: `make install`
-
-- Start maildev: `make start`
-
-Please make sure to update tests as appropriate and run `make test` command
+The Makefile runs project commands using mise-managed pnpm. Please make sure to update tests as appropriate and run `make test`.
 
 ## License
 

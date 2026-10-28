@@ -35,7 +35,8 @@ const emails = [
 const sendEmailsRecursive = (i = 0) => {
   transporter.sendMail(emails[i], (error, info) => {
     if (error) {
-      console.log(error);
+      console.error(error);
+      process.exitCode = 1;
     } else {
       console.log(`Email sent: ${info.response}`);
       if (i < emails.length - 1) {

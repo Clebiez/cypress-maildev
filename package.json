@@ -1,6 +1,7 @@
 {
   "name": "cypress-maildev",
-  "version": "2.0.0",
+  "version": "3.0.0",
+  "packageManager": "pnpm@10.33.0",
   "description": "An easy-to-use cypress bunch of commands to use Maildev API for tests messages reception !",
   "main": "./build/index.js",
   "repository": {
@@ -10,13 +11,13 @@
   "author": "Clément Le Biez <clement.lebiez@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "wait-on": "npx wait-on http://localhost:1080/api/healthz",
-    "test": "npx cypress open",
-    "e2e": "npx cypress run",
+    "wait-on": "pnpm exec wait-on http://localhost:1080/api/healthz",
+    "test": "pnpm exec cypress open",
+    "e2e": "pnpm exec cypress run",
     "fillEmail": "node ./fillEmail.js",
     "dev": "ts-node-dev --respawn  ./src/index.ts",
     "prod": "tsc --build && node ./build/index.js",
-    "prepare": "npm run build",
+    "prepare": "pnpm run build",
     "build": "tsc",
     "lint": "biome check .",
     "lint-fix": "biome check . --fix --unsafe"
@@ -29,16 +30,16 @@
     "mail"
   ],
   "devDependencies": {
-    "@biomejs/biome": "^2.5.0",
+    "@biomejs/biome": "^2.6.3",
     "@types/jest": "^30.0.0",
-    "@types/node": "^22.15.30",
-    "cypress": "^15.17.0",
-    "globals": "^16.3.0",
-    "nodemailer": "^9.0.0",
+    "@types/node": "^26.6.6",
+    "cypress": "^16.2.1",
+    "globals": "^17.13.0",
+    "nodemailer": "^10.2.1",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.8.3"
+    "typescript": "^7.0.2"
   },
   "dependencies": {
-    "wait-on": "^9.0.10"
+    "wait-on": "^9.5.1"
   }
 }
