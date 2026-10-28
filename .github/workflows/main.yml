@@ -22,6 +22,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      - name: Install mise tools
+        uses: jdx/mise-action@v5
       - name: Install Dependencies
         run: make install
       - name: Lint project
@@ -31,4 +33,4 @@ jobs:
       - name: Starting maildev
         run: make start
       - name: Cypress run
-        uses: cypress-io/github-action@v4
+        run: make test
