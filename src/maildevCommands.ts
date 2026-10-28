@@ -4,6 +4,7 @@ import type { Email } from "./types/Email";
 
 export class MaildevCommands {
   public baseUrl: string;
+  public apiPath: string;
   public request: Request;
 
   static get cypressCommands(): string[] {
@@ -22,7 +23,6 @@ export class MaildevCommands {
   }
 
   constructor() {
-    console.log("MAILDEV_PROTOCOL", Cypress.expose("MAILDEV_PROTOCOL"));
     this.baseUrl = `${Cypress.expose("MAILDEV_PROTOCOL")}://${Cypress.expose(
       "MAILDEV_HOST",
     )}`;
@@ -31,8 +31,10 @@ export class MaildevCommands {
       this.baseUrl += `:${Cypress.expose("MAILDEV_API_PORT")}`;
     }
 
+    this.apiPath = Cypress.expose("MAILDEV_VERSION_2") ? "" : "/api";
+
     this.request = new Request({
-      baseUrl: this.baseUrl,
+      baseUrl: `${this.baseUrl}${this.apiPath}`,
     });
   }
 
@@ -51,8 +53,9 @@ export class MaildevCommands {
   }
 
   maildevVisitMessageById(id: string): void {
-    cy.origin(`${this.baseUrl}`, { args: { id } }, ({ id }) => {
-      cy.visit(`/email/${id}/html`);
+    const { baseUrl, apiPath } = this;
+    cy.origin(baseUrl, { args: { id, apiPath } }, ({ id, apiPath }) => {
+      cy.visit(`${apiPath}/email/${id}/html`);
     });
   }
 
