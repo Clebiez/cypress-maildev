@@ -4,6 +4,7 @@
     "declaration": true,
     "module": "commonjs",
     "noImplicitAny": true,
+    "rootDir": "./src",
     "outDir": "build",
     "strict": true,
     "target": "es6",

@@ -26,23 +26,36 @@ We expect all contributors to follow our [Code of Conduct](CODE_OF_CONDUCT.md). 
 ### Development Setup
 
 1. **Fork and clone the repository**:
+
    ```bash
    git clone https://github.com/YOUR_USERNAME/cypress-maildev.git
    cd cypress-maildev
    ```
 
-2. **Install dependencies**:
+2. **We use mise** to fix a specific node and pnpm version. Install it by using the [official installation instructions](https://mise.jdx.dev/getting-started.html), then install the project tools:
+
+   ```bash
+   mise install
+   ```
+
+   mise is required for development. It selects the Node.js and pnpm versions declared in `mise.toml`; do not use separately installed versions for project commands.
+
+3. **Install dependencies**:
+
    ```bash
    make install
    ```
 
-3. **Start the development environment**:
+4. **Start the development environment**:
+
    ```bash
    make start
    ```
+
    This starts the maildev server using Docker.
 
-4. **Stop the development environment** when you're done:
+5. **Stop the development environment** when you're done:
+
    ```bash
    make stop
    ```
@@ -59,6 +72,7 @@ We expect all contributors to follow our [Code of Conduct](CODE_OF_CONDUCT.md). 
 ### Making Changes
 
 1. Create a new branch for your changes:
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -66,6 +80,7 @@ We expect all contributors to follow our [Code of Conduct](CODE_OF_CONDUCT.md). 
 2. Make your changes to the codebase.
 
 3. Build the project to verify your changes:
+
    ```bash
    make build
    ```

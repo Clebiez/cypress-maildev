@@ -7,8 +7,7 @@ Cypress Maildev is a bunch of Cypress commands in order to test your messages (S
 ## Installation
 
 ```bash
-npm install cypress-maildev --save-dev
-yarn add cypress-maildev --dev
+pnpm add --save-dev cypress-maildev
 ```
 
 ## Usage
@@ -18,7 +17,7 @@ yarn add cypress-maildev --dev
 ```JavaScript
 // cypress/support/e2e.js
 
-require('cypress-maildev');
+require("cypress-maildev");
 ```
 
 ### 2. Specify your maildev address
@@ -70,9 +69,9 @@ module.exports = defineConfig({
 Using one of this commands must be like this example :
 
 ```JavaScript
-  cy.maildevGetLastMessage().then((email) => {
-    expect(email.subject).to.equal("I'm the last email sent !");
-  });
+cy.maildevGetLastMessage().then((email) => {
+  expect(email.subject).to.equal("I'm the last email sent !");
+});
 ```
 
 For more examples you can check directly the [test file](./cypress/e2e/maildev.cy.ts).
@@ -82,7 +81,7 @@ For more examples you can check directly the [test file](./cypress/e2e/maildev.c
 Get all messages received in the Maildev instance.
 
 ```JavaScript
-cy.maildevGetAllMessages()
+cy.maildevGetAllMessages();
 ```
 
 ---
@@ -90,7 +89,7 @@ cy.maildevGetAllMessages()
 Get the last message received.
 
 ```JavaScript
-cy.maildevGetLastMessage()
+cy.maildevGetLastMessage();
 ```
 
 ---
@@ -135,7 +134,7 @@ Get all messages and find the last containing a sent to address.
 Use a strict string comparison.
 
 ```JavaScript
-cy.maildevGetMessageBySentTo()
+cy.maildevGetMessageBySentTo();
 ```
 
 ---
@@ -143,7 +142,7 @@ cy.maildevGetMessageBySentTo()
 Delete a message by giving the ID. In can be useful if you to only keep message that you haven't read yet.
 
 ```JavaScript
-cy.maildevDeleteMessageById()
+cy.maildevDeleteMessageById();
 ```
 
 ---
@@ -151,7 +150,7 @@ cy.maildevDeleteMessageById()
 Delete all message in order to flush your mailbox !
 
 ```JavaScript
-cy.maildevDeleteAllMessages()
+cy.maildevDeleteAllMessages();
 ```
 
 ---
@@ -161,17 +160,17 @@ It can be used **outside of maildev box** because it doesn't use maildev API but
 This function find in a string a specific amount of digits (default 6).
 
 ```JavaScript
-cy.maildevGetOTPCode(string, digits = 6)
+cy.maildevGetOTPCode(string, (digits = 6));
 ```
 
 Or use with another maildev command
 
 ```JavaScript
-  cy.maildevGetMessageBySubject("Your code").then(message => {
-    cy.maildevGetOTPCode(message.text).then(code => {
-      // Do something with the code
-    });
+cy.maildevGetMessageBySubject("Your code").then((message) => {
+  cy.maildevGetOTPCode(message.text).then((code) => {
+    // Do something with the code
   });
+});
 ```
 
 ---
@@ -179,7 +178,7 @@ Or use with another maildev command
 Simple test command that return true if Maildev is opened.
 
 ```JavaScript
-cy.maildevHealthcheck()
+cy.maildevHealthcheck();
 ```
 
 ## Contributing
@@ -187,12 +186,12 @@ cy.maildevHealthcheck()
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 - Clone the repo
+- Install mise and the pinned tools with `mise install`
+- Install dependencies with `make install`
+- Start maildev with `make start`
+- Run tests with `make test`
 
-- Install dependencies: `make install`
-
-- Start maildev: `make start`
-
-Please make sure to update tests as appropriate and run `make test` command
+The Makefile runs project commands using mise-managed pnpm. Please make sure to update tests as appropriate and run `make test`.
 
 ## License
 
